@@ -35,5 +35,9 @@
     "vite": "^4.3.5",
     "vite-plugin-cesium": "^1.2.22",
     "vue-tsc": "^1.6.4"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --cache",
+    "*.**": "prettier --check --ignore-unknown"
   }
 }
