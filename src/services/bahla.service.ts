@@ -13,7 +13,7 @@ export function setBahlaCamera(camera: Cesium.Camera) {
 }
 export async function switchBahlaModel(viewer: Cesium.Viewer, model: string) {
   viewer.scene.primitives.remove(tileset)
-  tileset = await Cesium.Cesium3DTileset.fromUrl(`/bahla/${model}/tileset.json`, {
+  tileset = await Cesium.Cesium3DTileset.fromUrl(`/dih/bahla/${model}/tileset.json`, {
     maximumScreenSpaceError: 4,
   })
   viewer.scene.primitives.add(tileset)
