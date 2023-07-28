@@ -13,8 +13,18 @@ export function setBahlaCamera(camera: Cesium.Camera) {
 }
 export async function switchBahlaModel(viewer: Cesium.Viewer, model: string) {
   viewer.scene.primitives.remove(tileset)
-  tileset = await Cesium.Cesium3DTileset.fromUrl(`/dih/bahla/${model}/tileset.json`, {
+  tileset = await Cesium.Cesium3DTileset.fromUrl(`./bahla/${model}/tileset.json`, {
     maximumScreenSpaceError: 4,
   })
   viewer.scene.primitives.add(tileset)
+
+  const boundingSphere = tileset.boundingSphere
+  viewer.camera.viewBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0, -2.0, 0))
+  viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+  // Position tileset
+  const cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center)
+  const surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0.0)
+  const offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, -45)
+  const translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3())
+  tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
 }

@@ -9,6 +9,6 @@
       "@/*": ["./src/*"]
     },
     "strictPropertyInitialization": false,
-    "strictNullChecks": false,
+    "strictNullChecks": false
   }
 }

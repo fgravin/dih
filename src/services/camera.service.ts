@@ -1,4 +1,4 @@
-import Cesium from 'cesium'
+import * as Cesium from 'cesium'
 import { mapContext } from '@/map.service'
 
 export function initView() {
@@ -9,6 +9,13 @@ viewer.scene.camera.setView({
 viewer.scene.camera.DEFAULT_VIEW_RECTANGLE = initialExtent
 */
 }
+
+export function zoomToTileset(tileset: Cesium.Cesium3DTileset, viewer: Cesium.Viewer) {
+  const boundingSphere = tileset.boundingSphere
+  viewer.camera.viewBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0, -20.0, 0))
+  viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+}
+
 export function flyTo() {
   const { viewer } = mapContext
   viewer.camera.flyTo({

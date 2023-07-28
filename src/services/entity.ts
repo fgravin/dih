@@ -1,24 +1,55 @@
 import * as Cesium from 'cesium'
+import { HeightReference, VerticalOrigin } from 'cesium'
 import type { SiteModel } from '@/domain/sites/sites.model'
 
 export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
   const location = Cesium.Cartesian3.fromDegrees(site.coordinates[0], site.coordinates[1], 30)
-  const { id, title, ionId, shortTitle } = site
+  const { id, title, tilesets, shortTitle } = site
 
-  ionId?.forEach(async (id) => {
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(id, {
-      maximumScreenSpaceError: 1,
-      baseScreenSpaceError: 1,
-      dynamicScreenSpaceError: true,
-      dynamicScreenSpaceErrorDensity: 1,
-    })
+  tilesets?.forEach(async (tilesetProp) => {
+    const { ionId, path } = tilesetProp
+    const tilesetOptions = {
+      maximumScreenSpaceError: 4,
+    }
+    const tileset = await (ionId
+      ? Cesium.Cesium3DTileset.fromIonAssetId(ionId, tilesetOptions)
+      : Cesium.Cesium3DTileset.fromUrl(path, tilesetOptions))
+
+    if (path) {
+      // clamp bahla to ground
+      const boundingSphere = tileset.boundingSphere
+      viewer.camera.viewBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0, -2.0, 0))
+      viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+      const cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center)
+      const surface = Cesium.Cartesian3.fromRadians(
+        cartographic.longitude,
+        cartographic.latitude,
+        0.0
+      )
+      const offset = Cesium.Cartesian3.fromRadians(
+        cartographic.longitude,
+        cartographic.latitude,
+        -40
+      )
+      const translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3())
+      tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
+    }
+    tilesetProp.tileset = tileset
     viewer.scene.primitives.add(tileset)
   })
 
+  /*
   viewer.entities.add({
     name: title,
     id: id + '',
     position: location,
+    // billboard: {
+    //   heightReference: HeightReference.RELATIVE_TO_GROUND,
+    //   color: new Cesium.Color(0.1, 0.55, 0.95),
+    //   scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+    //   verticalOrigin: VerticalOrigin.CENTER,
+    //   show: true,
+    // },
     point: {
       color: new Cesium.Color(0.1, 0.55, 0.95),
       pixelSize: 20,
@@ -36,6 +67,7 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
       pixelOffset: new Cesium.Cartesian2(0, -30),
     },
   })
+*/
   // viewer.scene.primitives.add(tileset)
   // viewer.entities.add(entity)
 }

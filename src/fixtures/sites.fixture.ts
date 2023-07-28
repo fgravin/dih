@@ -5,11 +5,29 @@ import jeddahThumbnail from '../../public/api/jeddah/thumbnail.jpg'
 import baalbekThumbnail from '../../public/api/baalbek/thumbnail.jpg'
 import memphisThumbnail from '../../public/api/memphis/thumbnail.jpg'
 import bahlaThumbnail from '../../public/api/bahla/thumbnail.jpeg'
+import type { SiteApiResponse } from '@/api/sites.api'
 
-export const SITE_FIXTURES = () => [
+export const SITE_FIXTURES = (): SiteApiResponse[] => [
   {
     id: 1,
-    ionId: [1955163, 1878122, 1882739, 1878799], // al farid, khuraimat, diwan, old city
+    tilesets: [
+      {
+        name: 'Jabal',
+        ionId: 2064034,
+      },
+      {
+        name: 'Son of Kuza',
+        ionId: 2063968,
+      },
+      {
+        name: 'Khuraymat',
+        ionId: 2063719,
+      },
+      {
+        name: 'Diwan',
+        ionId: 2063963,
+      },
+    ],
     title: 'Hegra Archaeological Site <br/> (al-Hijr / Madā in Ṣāliḥ)',
     shortTitle: 'Al-Hijr',
     slug: 'hegra-archaeological-site',
@@ -27,6 +45,12 @@ export const SITE_FIXTURES = () => [
   {
     id: 2,
     title: 'Bahla Fort',
+    tilesets: [
+      {
+        name: 'Bahla Fort',
+        path: './bahla/OM_Bahla_fort_30m-nadir_tiled_200K_4K_1024/tileset.json',
+      },
+    ],
     shortTitle: 'Bahla Fort',
     slug: 'bahla-fort',
     imageOnly: true,
@@ -41,6 +65,7 @@ export const SITE_FIXTURES = () => [
     description:
       'The oasis of Bahla owes its prosperity to the Banu Nebhan, the dominant tribe in the area from the 12th to the end of the 15th century. The ruins of the immense fort, with its walls and towers of unbaked brick and its stone foundations, is a remarkable example of this type of fortification and attests to the power of the Banu Nebhan.',
   },
+  /*
   {
     id: 3,
     title: 'Memphis and its Necropolis',
@@ -116,4 +141,5 @@ export const SITE_FIXTURES = () => [
     description:
       'From the 7th century AD it was established as a major port for Indian Ocean trade routes, channeling goods to Mecca.',
   },
+*/
 ]

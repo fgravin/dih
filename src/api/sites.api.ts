@@ -7,7 +7,11 @@ interface Location {
 
 export interface SiteApiResponse {
   id: number
-  ionId?: number[]
+  tilesets: {
+    name: string
+    ionId?: number
+    path?: string
+  }[]
   title: string
   shortTitle?: string
   slug: string
