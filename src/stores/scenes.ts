@@ -5,10 +5,10 @@ import { defineStore } from 'pinia'
 export type DihScene = any
 
 export const useSceneStore = defineStore('scenes', () => {
-  const scenes: Ref<DihScene[]> = ref([])
+  const scene = ref()
 
-  function add(scene: DihScene) {
-    scenes.value = [...scenes.value, scene]
+  function setScene(sceneId: number) {
+    scene.value = sceneId
   }
-  return { scenes, add }
+  return { scene, setScene }
 })

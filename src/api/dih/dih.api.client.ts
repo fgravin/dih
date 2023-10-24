@@ -5,7 +5,7 @@ interface Location {
   long: number
 }
 
-export interface SiteApiResponse {
+export type SiteApiResponse = Partial<{
   id: number
   tilesets: {
     name: string
@@ -21,6 +21,6 @@ export interface SiteApiResponse {
   category: string
   overlay: number
   description: string
-}
+}>
 
 export const getSiteData = (): Promise<SiteApiResponse[]> => Promise.resolve(SITE_FIXTURES())

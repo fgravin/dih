@@ -1,11 +1,9 @@
 import * as Cesium from 'cesium'
-import { HeightReference, VerticalOrigin } from 'cesium'
+import { HeightReference, JulianDate, VerticalOrigin } from 'cesium'
 import type { SiteModel } from '@/domain/sites/sites.model'
 
-export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
-  const location = Cesium.Cartesian3.fromDegrees(site.coordinates[0], site.coordinates[1], 30)
+export async function loadSiteTileset(viewer: Cesium.Viewer, site: SiteModel) {
   const { id, title, tilesets, shortTitle } = site
-
   tilesets?.forEach(async (tilesetProp) => {
     const { ionId, path } = tilesetProp
     const tilesetOptions = {
@@ -18,8 +16,8 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
     if (path) {
       // clamp bahla to ground
       const boundingSphere = tileset.boundingSphere
-      viewer.camera.viewBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0, -2.0, 0))
-      viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+      // viewer.camera.viewBoundingSphere(boundingSphere, new Cesium.HeadingPitchRange(0, -2.0, 0))
+      // viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
       const cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center)
       const surface = Cesium.Cartesian3.fromRadians(
         cartographic.longitude,
@@ -37,37 +35,44 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
     tilesetProp.tileset = tileset
     viewer.scene.primitives.add(tileset)
   })
+}
+export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
+  const position = Cesium.Cartesian3.fromDegrees(site.coordinates[0], site.coordinates[1], 900)
+  const { id, title, shortTitle } = site
 
-  /*
   viewer.entities.add({
     name: title,
     id: id + '',
-    position: location,
-    // billboard: {
-    //   heightReference: HeightReference.RELATIVE_TO_GROUND,
-    //   color: new Cesium.Color(0.1, 0.55, 0.95),
-    //   scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
-    //   verticalOrigin: VerticalOrigin.CENTER,
-    //   show: true,
-    // },
-    point: {
-      color: new Cesium.Color(0.1, 0.55, 0.95),
-      pixelSize: 20,
-      outlineColor: new Cesium.Color(0.1, 0.55, 0.95, 0.5),
-      outlineWidth: 8,
-      // translucencyByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e7, 0.2),
+    position,
+    billboard: {
+      heightReference: HeightReference.RELATIVE_TO_GROUND,
+      pixelOffset: new Cesium.Cartesian2(0, 0),
+      eyeOffset: new Cesium.Cartesian3(0.0, 0.0, -50.0),
+      image: '/img.png',
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+      verticalOrigin: VerticalOrigin.CENTER,
+      show: true,
+      height: 75,
+      width: 75,
     },
-    label: {
-      text: shortTitle || title,
-      font: '18pt monospace',
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      outlineWidth: 2,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-      pixelOffset: new Cesium.Cartesian2(0, -30),
-    },
+    // point: {
+    //   color: new Cesium.Color(0.1, 0.55, 0.95),
+    //   pixelSize: 20,
+    //   outlineColor: new Cesium.Color(0.1, 0.55, 0.95, 0.5),
+    //   outlineWidth: 8,
+    //   // translucencyByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e7, 0.2),
+    //   scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+    // },
+    // label: {
+    //   text: shortTitle || title,
+    //   font: '18pt monospace',
+    //   style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    //   outlineWidth: 2,
+    //   verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    //   pixelOffset: new Cesium.Cartesian2(0, -30),
+    // },
   })
-*/
+
   // viewer.scene.primitives.add(tileset)
   // viewer.entities.add(entity)
 }

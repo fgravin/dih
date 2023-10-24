@@ -13,6 +13,7 @@ export interface SiteModel {
   title: string
   shortTitle: string
   coordinates: [number, number]
+  description: string
 }
 
 export type SiteFeature = Feature<Point, SiteModel>

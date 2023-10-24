@@ -1,164 +1,64 @@
 <script setup lang="ts">
-import { onMounted, Ref, ref, watch } from 'vue'
-import { flyToPOI, init3D, mapContext } from '@/3d'
-import { switchBahlaModel } from '@/services/bahla.service'
-import { addAlFarid } from '@/services/hegra.service'
-import { getSiteData } from '@/api/sites.api'
-import { siteApiToModel } from '@/api/api.mappers'
-import { addSiteEntity } from '@/services/entity'
-import Cesium from 'cesium'
-import { SiteModel, TilesetProp } from '@/domain/sites/sites.model'
-import { zoomToTileset } from '@/services/camera.service'
+import { computed, onMounted, provide, shallowRef } from 'vue'
+import { flyHome, flyToEntity, spinGlobe } from '@/services/camera.service'
+import DashiconsAdminHome from '@/components/icon/HomeIcon.vue'
+import * as Cesium from 'cesium'
+import { useSceneStore } from '@/stores/scenes'
+import SceneInfo from '@/components/SceneInfo.vue'
+import { init3D } from '@/globe.service'
+import { addSiteEntity, loadSiteTileset } from '@/services/entity'
+import { SiteModel } from '@/domain/sites/sites.model'
+import { useSitesStore } from '@/stores/sites'
+
 const mapEltId = 'map'
 
-const model = ref('OM_Bahla_fort_30m-nadir_tiled_200K_4K_1024')
-const tilsetsProps: Ref<TilesetProp[]> = ref(null)
+let viewer: Cesium.Viewer
+const sceneStore = useSceneStore()
+const sitesStore = useSitesStore()
+
+sitesStore.fetchSites()
+
+const scene = computed(() => sitesStore.getByTitle(sceneStore.scene))
 
 onMounted(async () => {
-  await init3D(mapEltId)
-
-  const apiSites = await getSiteData()
-  const sites = apiSites.map(siteApiToModel)
-  tilsetsProps.value = sites.map((site) => site.tilesets).flat()
-  sites.forEach((site) => addSiteEntity(mapContext.viewer, site))
-
-  // switchBahlaModel(mapContext.viewer, model.value)
-  // addAlFarid(mapContext.viewer)
-  // add3DModel()
-  // moveToModel(add3DModel())
+  viewer = await init3D(mapEltId)
+  const unsub = viewer.scene.globe.tileLoadProgressEvent.addEventListener(() => {
+    if (viewer.scene.globe.tilesLoaded) {
+      sitesStore.sites.forEach(async (site) => site && addSiteEntity(viewer, site as SiteModel))
+      sitesStore.sites.forEach(async (site) => site && loadSiteTileset(viewer, site as SiteModel))
+      spinGlobe(viewer, 0.06)
+      unsub()
+    }
+  })
+  viewer.selectedEntityChanged.addEventListener(function (selectedEntity) {
+    sceneStore.setScene(selectedEntity?.name)
+  })
 })
 
-watch(model, (value) => switchBahlaModel(mapContext.viewer, value))
-function info() {
-  console.log(mapContext.viewer.camera)
+const zoomToSite = function (site: SiteModel) {
+  const siteEntity = viewer.entities.getById(site.id + '')
+  flyToEntity(viewer, siteEntity)
 }
-function flyTo() {
-  flyToPOI()
-}
-function flyToTileset(tileset: Cesium.Cesium3DTileset) {
-  zoomToTileset(tileset, mapContext.viewer)
-}
-
-function switchBahlaModel_(model: string) {}
 </script>
 
 <template>
-  <header
-    class="relative z-50 w-full flex-none text-sm font-semibold leading-6 text-[#4b8ec7] bg-slate-100"
-  >
-    <nav aria-label="Global" class="flex mx-auto max-w-container px-4 sm:px-6 lg:px-8">
-      <div class="w-full relative flex items-center justify-between py-[2.125rem]">
-        <div class="grow mx-6 text-4xl">Dive Into Heritage</div>
-        <div class="items-end flex gap-2">
-          <a href="https://unitar.org/" alt="UNITAR" class="ml-5">
-            <img src="/unitar.png" class="h-16" />
-          </a>
-          <a href="https://unitar.org/unosat" alt="UNOSAT" class="ml-5">
-            <img src="/unosat.png" class="h-16" />
-          </a>
-        </div>
+  <main class="bg-amber-100 grow relative flex flex-row">
+    <aside class="bg-white p-4 flex flex-col w-[400px] h-full shrink-0">
+      <div v-if="scene" class="">
+        <SceneInfo :scene="scene" @zoom="zoomToSite"></SceneInfo>
       </div>
-    </nav>
-  </header>
-  <main class="bg-amber-100 grow relative">
-    <aside class="absolute left-2 top-2 z-10 p-4 bg-slate-100 flex flex-col">
-      <template v-for="tilsetProp in tilsetsProps">
-        <button
-          class="rounded capitalize text-white bg-blue-500 hover:bg-blue-300 my-1 px-10"
-          @click="flyToTileset(tilsetProp.tileset)"
-        >
-          {{ tilsetProp.name }}
-        </button>
-      </template>
-      <!--
-      <div class="abr">
-        <div class="flex items-center items">
-          <input
-            id="OM_Bahla_fort_30m-nadir_tiled_500K_4K_256"
-            name="bahla-model"
-            v-model="model"
-            type="radio"
-            class="h-4 w-4 text-blue-500 text-blue-300 bnm"
-            value="OM_Bahla_fort_30m-nadir_tiled_500K_4K_256"
-          /><label
-            for="OM_Bahla_fort_30m-nadir_tiled_500K_4K_256"
-            class="ml-3 block text-sm font-medium leading-6 text-main"
-            >OM_Bahla_fort_30m-nadir_tiled_500K_4K_256</label
-          >
-        </div>
-        <div class="flex items-center items">
-          <input
-            id="OM_Bahla_fort_30m-nadir_tiled_500K_8K_256"
-            name="bahla-model"
-            v-model="model"
-            type="radio"
-            class="h-4 w-4 text-blue-500 text-blue-300 bnm"
-            value="OM_Bahla_fort_30m-nadir_tiled_500K_8K_256"
-          /><label
-            for="OM_Bahla_fort_30m-nadir_tiled_500K_8K_256"
-            class="ml-3 block text-sm font-medium leading-6 text-main"
-            >OM_Bahla_fort_30m-nadir_tiled_500K_8K_256</label
-          >
-        </div>
-        <div class="flex items-center items">
-          <input
-            id="OM_Bahla_fort_30m-nadir_tiled_500K_8K_256-jpeg"
-            name="bahla-model"
-            v-model="model"
-            type="radio"
-            class="h-4 w-4 text-blue-500 text-blue-300 bnm"
-            value="OM_Bahla_fort_30m-nadir_tiled_500K_8K_256-jpeg"
-          /><label
-            for="OM_Bahla_fort_30m-nadir_tiled_500K_8K_256-jpeg"
-            class="ml-3 block text-sm font-medium leading-6 text-main"
-            >OM_Bahla_fort_30m-nadir_tiled_500K_8K_256-jpeg</label
-          >
-        </div>
-        <div class="flex items-center items">
-          <input
-            id="cropped_30m_200K_4K"
-            name="bahla-model"
-            v-model="model"
-            type="radio"
-            class="h-4 w-4 text-blue-500 text-blue-300 bnm"
-            value="cropped_30m_200K_4K"
-          /><label
-            for="cropped_30m_200K_4K"
-            class="ml-3 block text-sm font-medium leading-6 text-main"
-            >cropped_30m_200K_4K</label
-          >
-        </div>
-        <div class="flex items-center items">
-          <input
-            id="cropped_30m_200K_8K"
-            name="bahla-model"
-            v-model="model"
-            type="radio"
-            class="h-4 w-4 text-blue-500 text-blue-300 bnm"
-            value="cropped_30m_200K_8K"
-          /><label
-            for="cropped_30m_200K_8K"
-            class="ml-3 block text-sm font-medium leading-6 text-main"
-            >cropped_30m_200K_8K</label
-          >
-        </div>
-        <div class="flex items-center items">
-          <input
-            id="cropped_30m_500K_4K"
-            name="bahla-model"
-            v-model="model"
-            type="radio"
-            class="h-4 w-4 text-blue-500 text-blue-300 bnm"
-            value="cropped_30m_500K_4K"
-          /><label
-            for="cropped_30m_500K_4K"
-            class="ml-3 block text-sm font-medium leading-6 text-main"
-            >cropped_30m_500K_4K</label
-          >
-        </div>
-      </div>
--->
     </aside>
-    <div :id="mapEltId" class="w-full h-full"></div>
+    <div :id="mapEltId" class="w-full h-full grow"></div>
+    <div class="absolute right-2 top-2 bg-transparent">
+      <button
+        title="Fly home"
+        alt="Fly home"
+        aria-label="Fly home"
+        @click="flyHome(viewer)"
+        class="text-white text-5xl font-bold hover:scale-125 duration-700"
+      >
+        <DashiconsAdminHome></DashiconsAdminHome>
+      </button>
+    </div>
   </main>
 </template>

@@ -13,8 +13,8 @@
     "format": "prettier --write ./"
   },
   "dependencies": {
-    "pinia": "^2.0.36",
-    "vue": "^3.3.2"
+    "pinia": "^2.1.7",
+    "vue": "^3.3.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
