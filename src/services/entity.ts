@@ -48,7 +48,7 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
       heightReference: HeightReference.RELATIVE_TO_GROUND,
       pixelOffset: new Cesium.Cartesian2(0, 0),
       eyeOffset: new Cesium.Cartesian3(0.0, 0.0, -50.0),
-      image: '/img.png',
+      image: './img.png',
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
       verticalOrigin: VerticalOrigin.CENTER,
       show: true,
