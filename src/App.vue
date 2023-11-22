@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, onMounted, provide, shallowRef } from 'vue'
-import { flyHome, flyToEntity, spinGlobe } from '@/services/camera.service'
+import { flyHome, flyToEntity, spinGlobe } from '@/services/cesium/camera.service'
 import DashiconsAdminHome from '@/components/icon/HomeIcon.vue'
 import * as Cesium from 'cesium'
 import { useSceneStore } from '@/stores/scenes'
 import SceneInfo from '@/components/SceneInfo.vue'
 import { init3D } from '@/globe.service'
-import { addSiteEntity, loadSiteTileset } from '@/services/entity'
+import { addSiteEntity, loadSiteTileset } from '@/services/cesium/entity'
 import { SiteModel } from '@/domain/sites/sites.model'
 import { useSitesStore } from '@/stores/sites'
 
@@ -26,7 +26,7 @@ onMounted(async () => {
     if (viewer.scene.globe.tilesLoaded) {
       sitesStore.sites.forEach(async (site) => site && addSiteEntity(viewer, site as SiteModel))
       sitesStore.sites.forEach(async (site) => site && loadSiteTileset(viewer, site as SiteModel))
-      spinGlobe(viewer, 0.06)
+      spinGlobe(viewer, 0.04)
       unsub()
     }
   })

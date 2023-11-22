@@ -49,6 +49,7 @@ export function spinGlobe(viewer, dynamicRate = 0.01) {
   }
   startSpin(viewer)
   viewer.canvas.addEventListener('click', () => stopSpin(viewer))
+  viewer.canvas.addEventListener('wheel', () => stopSpin(viewer))
 }
 
 export function startSpin(viewer: Cesium.Viewer) {

@@ -14,6 +14,7 @@ export interface SiteModel {
   shortTitle: string
   coordinates: [number, number]
   description: string
+  src: string
 }
 
 export type SiteFeature = Feature<Point, SiteModel>

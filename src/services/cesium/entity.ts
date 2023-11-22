@@ -46,11 +46,12 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
     position,
     billboard: {
       heightReference: HeightReference.RELATIVE_TO_GROUND,
-      pixelOffset: new Cesium.Cartesian2(0, 0),
-      eyeOffset: new Cesium.Cartesian3(0.0, 0.0, -50.0),
-      image: './img.png',
+      // pixelOffset: new Cesium.Cartesian2(0, 0),
+      // eyeOffset: new Cesium.Cartesian3(0.0, 0.0, -50.0),
+      image: './marker.png',
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
       verticalOrigin: VerticalOrigin.CENTER,
+      disableDepthTestDistance: 20000000,
       show: true,
       height: 75,
       width: 75,
@@ -63,14 +64,16 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
     //   // translucencyByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e7, 0.2),
     //   scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
     // },
-    // label: {
-    //   text: shortTitle || title,
-    //   font: '18pt monospace',
-    //   style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    //   outlineWidth: 2,
-    //   verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    //   pixelOffset: new Cesium.Cartesian2(0, -30),
-    // },
+    label: {
+      text: shortTitle || title,
+      font: '18pt ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+      style: Cesium.LabelStyle.FILL,
+      outlineWidth: 1,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      pixelOffset: new Cesium.Cartesian2(0, -40),
+      disableDepthTestDistance: Number.POSITIVE_INFINITY,
+      translucencyByDistance: new Cesium.NearFarScalar(5.0e6, 1.0, 1.0e7, 0.0)
+    },
   })
 
   // viewer.scene.primitives.add(tileset)

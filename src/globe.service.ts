@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium'
 import { CESIUM_ION_TOKEN, INITIAL_RECTANGLE } from '@/config'
+import { init } from '@/services/cesium/mouse-position'
 
 export async function init3D(target: string) {
   Cesium.Ion.defaultAccessToken = CESIUM_ION_TOKEN
@@ -22,5 +23,6 @@ export async function init3D(target: string) {
   // viewer.camera.setView({destination: INITIAL_RECTANGLE})
   // viewer.scene.globe.show = false
 
+  init(viewer)
   return viewer
 }

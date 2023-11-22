@@ -1,6 +1,12 @@
 import hegraThumbnail from '../../public/api/hegra/thumbnail.jpg'
 import memphisThumbnail from '../../public/api/memphis/thumbnail.jpg'
 import bahlaThumbnail from '../../public/api/bahla/thumbnail.jpeg'
+import petraThumbnail from '../../public/api/petra/thumbnail.jpg'
+import ancientThebesThumbnail from '../../public/api/ancient-thebes/thumbnail.jpg'
+import baalbekThumbnail from '../../public/api/baalbek/thumbnail.jpg'
+import jeddahThumbnail from '../../public/api/jeddah/thumbnail.jpg'
+
+
 import type { SiteApiResponse } from '@/api/dih/dih.api.client'
 
 export const SITE_FIXTURES = (): SiteApiResponse[] => [
@@ -24,7 +30,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
         ionId: 2063963,
       },
     ],
-    title: 'Hegra Archaeological Site <br/> (al-Hijr / Madā in Ṣāliḥ)',
+    title: 'Hegra Archaeological Site (al-Hijr / Madā in Ṣāliḥ)',
     shortTitle: 'Al-Hijr',
     slug: 'hegra-archaeological-site',
     src: `${hegraThumbnail}`,
@@ -61,10 +67,10 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     description:
       'The oasis of Bahla owes its prosperity to the Banu Nebhan, the dominant tribe in the area from the 12th to the end of the 15th century. The ruins of the immense fort, with its walls and towers of unbaked brick and its stone foundations, is a remarkable example of this type of fortification and attests to the power of the Banu Nebhan.',
   },
-  /*
 {
   id: 3,
   title: 'Memphis and its Necropolis',
+  shortTitle: 'Memphis',
   slug: '',
   src: `${memphisThumbnail}`,
   location: {
@@ -80,6 +86,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
 {
   id: 4,
   title: 'Petra',
+  shortTitle: 'Petra',
   slug: '',
   src: `${petraThumbnail}`,
   location: {
@@ -95,6 +102,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
 {
   id: 5,
   title: 'Ancient Thebes',
+  shortTitle: 'Ancient Thebes',
   slug: '',
   src: `${ancientThebesThumbnail}`,
   location: {
@@ -110,6 +118,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
 {
   id: 6,
   title: 'Baalbek',
+  shortTitle: 'Baalbek',
   slug: '',
   src: `${baalbekThumbnail}`,
   location: {
@@ -125,6 +134,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
 {
   id: 7,
   title: 'Historic Jeddah, the Gate to Makkah',
+  shortTitle: 'Jeddah',
   slug: '',
   src: `${jeddahThumbnail}`,
   location: {
@@ -137,5 +147,4 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
   description:
     'From the 7th century AD it was established as a major port for Indian Ocean trade routes, channeling goods to Mecca.',
 },
-*/
 ]
