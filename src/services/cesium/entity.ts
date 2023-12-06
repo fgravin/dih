@@ -51,7 +51,7 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
       image: './marker.png',
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
       verticalOrigin: VerticalOrigin.CENTER,
-      disableDepthTestDistance: 20000000,
+      // disableDepthTestDistance: 20000000,
       show: true,
       height: 75,
       width: 75,
@@ -71,7 +71,6 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
       outlineWidth: 1,
       verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
       pixelOffset: new Cesium.Cartesian2(0, -40),
-      disableDepthTestDistance: Number.POSITIVE_INFINITY,
       translucencyByDistance: new Cesium.NearFarScalar(5.0e6, 1.0, 1.0e7, 0.0)
     },
   })
