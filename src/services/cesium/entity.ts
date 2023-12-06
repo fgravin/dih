@@ -27,7 +27,7 @@ export async function loadSiteTileset(viewer: Cesium.Viewer, site: SiteModel) {
       const offset = Cesium.Cartesian3.fromRadians(
         cartographic.longitude,
         cartographic.latitude,
-        -40
+        -16
       )
       const translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3())
       tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
