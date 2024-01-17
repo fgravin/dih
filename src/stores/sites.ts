@@ -1,4 +1,4 @@
-import { Ref, ref, shallowRef } from 'vue'
+import { shallowRef } from 'vue'
 import { defineStore } from 'pinia'
 import { SiteModel } from '@/domain/sites/sites.model'
 import { siteApiToModel } from '@/api/dih/dih.api.mappers'

@@ -39,14 +39,18 @@ const zoomToSite = function (site: SiteModel) {
   const siteEntity = viewer.entities.getById(site.id + '')
   flyToEntity(viewer, siteEntity)
 }
+const closeSite = function () {
+  sceneStore.setScene(null)
+}
 </script>
 
 <template>
-  <main class="bg-amber-100 grow relative flex flex-row">
-    <aside class="bg-white p-4 flex flex-col w-[400px] h-full shrink-0">
-      <div v-if="scene" class="">
-        <SceneInfo :scene="scene" @zoom="zoomToSite"></SceneInfo>
-      </div>
+  <main class="bg-amber-100 h-screen relative flex">
+    <aside
+      class="bg-black p-6 flex rounded-3xl flex-col absolute top-2 right-32 z-10 text-white"
+      v-if="sceneStore.scene"
+    >
+      <SceneInfo :scene="scene" @zoom="zoomToSite" @close="closeSite"></SceneInfo>
     </aside>
     <div :id="mapEltId" class="w-full h-full grow"></div>
     <div class="absolute right-2 top-2 bg-transparent">

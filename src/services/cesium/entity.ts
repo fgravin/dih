@@ -1,5 +1,5 @@
 import * as Cesium from 'cesium'
-import { HeightReference, JulianDate, VerticalOrigin } from 'cesium'
+import { Cartesian3, HeightReference, VerticalOrigin } from 'cesium'
 import type { SiteModel } from '@/domain/sites/sites.model'
 
 export async function loadSiteTileset(viewer: Cesium.Viewer, site: SiteModel) {
@@ -7,7 +7,7 @@ export async function loadSiteTileset(viewer: Cesium.Viewer, site: SiteModel) {
   tilesets?.forEach(async (tilesetProp) => {
     const { ionId, path } = tilesetProp
     const tilesetOptions = {
-      maximumScreenSpaceError: 4,
+      maximumScreenSpaceError: 2,
     }
     const tileset = await (ionId
       ? Cesium.Cesium3DTileset.fromIonAssetId(ionId, tilesetOptions)
@@ -27,7 +27,7 @@ export async function loadSiteTileset(viewer: Cesium.Viewer, site: SiteModel) {
       const offset = Cesium.Cartesian3.fromRadians(
         cartographic.longitude,
         cartographic.latitude,
-        -16
+        -40
       )
       const translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3())
       tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
@@ -51,6 +51,7 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
       image: './marker.png',
       scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
       verticalOrigin: VerticalOrigin.CENTER,
+      eyeOffset: new Cartesian3(0.0, 0.0, -100000.0),
       // disableDepthTestDistance: 20000000,
       show: true,
       height: 75,
@@ -71,7 +72,8 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
       outlineWidth: 1,
       verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
       pixelOffset: new Cesium.Cartesian2(0, -40),
-      translucencyByDistance: new Cesium.NearFarScalar(5.0e6, 1.0, 1.0e7, 0.0)
+      eyeOffset: new Cartesian3(0.0, 0.0, -100000.0),
+      translucencyByDistance: new Cesium.NearFarScalar(5.0e6, 1.0, 1.0e7, 0.0),
     },
   })
 
