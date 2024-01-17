@@ -42,6 +42,9 @@ const zoomToSite = function (site: SiteModel) {
 const closeSite = function () {
   sceneStore.setScene(null)
 }
+const openSite = function (site: SiteModel) {
+  top.window.location.href = `/site/${site.shortTitle}-storytelling`
+}
 </script>
 
 <template>
@@ -50,7 +53,7 @@ const closeSite = function () {
       class="bg-black p-6 flex rounded-3xl flex-col absolute top-2 right-32 z-10 text-white"
       v-if="sceneStore.scene"
     >
-      <SceneInfo :scene="scene" @zoom="zoomToSite" @close="closeSite"></SceneInfo>
+      <SceneInfo :scene="scene" @zoom="zoomToSite" @close="closeSite" @enter="openSite" ></SceneInfo>
     </aside>
     <div :id="mapEltId" class="w-full h-full grow"></div>
     <div class="absolute right-2 top-2 bg-transparent">
