@@ -144,6 +144,34 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
         name: 'Triumphal Arch',
         ionId: 2418050	,
       },
+      {
+        name: 'Nympheum',
+        ionId: 2420480,
+      },
+      {
+        name: 'Amphitheatre',
+        ionId: 2422209,
+      },
+      {
+        name: 'Market place',
+        ionId: 2422415,
+      },
+      {
+        name: 'Old forum',
+        ionId: 2423481,
+      },
+      {
+        name: 'Lighthouse',
+        ionId: 2423507,
+      },
+      {
+        name: 'Baths',
+        ionId: 2423626,
+      },
+      {
+        name: 'Forum Basilica',
+        ionId: 2423697,
+      },
     ],
     country: 'Libya',
     category: 'CULTURAL',
@@ -194,6 +222,12 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     title: 'Biblos',
     shortTitle: 'Biblos',
     slug: '',
+    tilesets: [
+      {
+        name: 'Biblos',
+        ionId: 2447790,
+      },
+    ],
     src: `${biblosThumbnail}`,
     location: {
       lat: 34.12194444,
@@ -226,6 +260,40 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     title: 'Cyrine',
     shortTitle: 'Cyrine',
     slug: '',
+    tilesets: [
+      {
+        name: 'Temple of Demeter',
+        ionId: 2433866,
+      },
+      {
+        name: 'Odeon',
+        ionId: 2433862,
+      },
+      {
+        name: 'Amphitheatre',
+        ionId: 2433843,
+      },
+      {
+        name: 'Theatre',
+        ionId: 2423595,
+      },
+      {
+        name: 'Sanctuary',
+        ionId: 2423586,
+      },
+      {
+        name: 'Gymnasium',
+        ionId: 2423553,
+      },
+      {
+        name: 'Agora',
+        ionId: 2423534,
+      },
+      {
+        name: 'Temple of Zeus',
+        ionId: 2423526,
+      },
+    ],
     src: `${cyrineThumbnail}`,
     location: {
       lat: 32.825,

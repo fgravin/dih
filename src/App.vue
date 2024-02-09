@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, provide, shallowRef } from 'vue'
+import { computed, onMounted } from 'vue'
 import { flyHome, flyToEntity, spinGlobe } from '@/services/cesium/camera.service'
 import DashiconsAdminHome from '@/components/icon/HomeIcon.vue'
 import * as Cesium from 'cesium'

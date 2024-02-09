@@ -50,6 +50,6 @@ const scene = computed(() => props.scene)
 
 <style scoped>
 .nav-btn {
-  @apply bg-red-600 hover:bg-red-800 px-4 py-3 rounded-3xl w-full;
+  @apply uppercase font-bold bg-primary hover:bg-primary/75 px-4 py-3 rounded-3xl w-full;
 }
 </style>

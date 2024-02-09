@@ -68,7 +68,7 @@ export async function addSiteEntity(viewer: Cesium.Viewer, site: SiteModel) {
     label: {
       text: shortTitle || title,
       font: '18pt ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-      style: Cesium.LabelStyle.FILL,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
       outlineWidth: 1,
       verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
       pixelOffset: new Cesium.Cartesian2(0, -40),
