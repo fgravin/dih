@@ -22,7 +22,7 @@ export async function init3D(target: string) {
     baseLayer: Cesium.ImageryLayer.fromProviderAsync(
       Cesium.ArcGisMapServerImageryProvider.fromBasemapType(Cesium.ArcGisBaseMapType.SATELLITE, {
         token: ARCGIS_TOKEN,
-      })
+      }), {}
     ),
     terrain: Cesium.Terrain.fromWorldTerrain(),
   })

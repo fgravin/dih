@@ -21,6 +21,7 @@ export type SiteApiResponse = Partial<{
   category: string
   overlay: number
   description: string
+  imageOnly: boolean
 }>
 
 export const getSiteData = (): Promise<SiteApiResponse[]> => Promise.resolve(SITE_FIXTURES())

@@ -25,3 +25,7 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Docker
+Build image `docker build . -t fgravin/dih-globe:latest`
+Run `docker run -p 8080:80 fgravin/dih-globe:latest`

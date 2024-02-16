@@ -9,6 +9,8 @@
       "@/*": ["./src/*"]
     },
     "strictPropertyInitialization": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "verbatimModuleSyntax": false,
+    "noImplicitAny": false,
   }
 }

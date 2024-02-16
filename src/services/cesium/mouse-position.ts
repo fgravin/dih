@@ -24,15 +24,15 @@ export const init = (viewer: Cesium.Viewer) => {
           1.0,
           7.0e7,
           0.0
-        )
-        hoverObject.id.label.show = true
+        ) as any
+        hoverObject.id.label.show = true as any
         if (!hoveredEntities.includes(hoverObject.id)) {
           hoveredEntities.push(hoverObject.id)
         }
       } else {
         hoveredEntities.forEach(
           (entity) =>
-            (entity.label.translucencyByDistance = new Cesium.NearFarScalar(5.0e6, 1.0, 1.0e7, 0.0))
+            (entity.label.translucencyByDistance = new Cesium.NearFarScalar(5.0e6, 1.0, 1.0e7, 0.0) as any)
         )
         document.body.style.cursor = 'default'
       }
