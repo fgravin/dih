@@ -219,12 +219,12 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
   },
   {
     id: 8,
-    title: 'Biblos',
-    shortTitle: 'Biblos',
+    title: 'Byblos',
+    shortTitle: 'Byblos',
     slug: '',
     tilesets: [
       {
-        name: 'Biblos',
+        name: 'Byblos',
         ionId: 2447790,
       },
     ],
@@ -257,8 +257,8 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
   },
   {
     id: 10,
-    title: 'Cyrine',
-    shortTitle: 'Cyrine',
+    title: 'Cyrene',
+    shortTitle: 'Cyrene',
     slug: '',
     tilesets: [
       {
@@ -303,6 +303,6 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     category: 'CULTURAL',
     overlay: 0,
     description:
-      "Qal'at al-Bahrain – Ancient Harbour and Capital of Dilmun",
+      "Cyrene was an ancient Greek and later Roman city near present-day Shahhat, Libya. It was the oldest and most important of the five Greek cities in the region.",
   },
 ]
