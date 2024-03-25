@@ -34,7 +34,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     ],
     title: 'Hegra Archaeological Site (al-Hijr / Madā in Ṣāliḥ)',
     shortTitle: 'Al-Hijr',
-    slug: 'hegra-archaeological-site',
+    slug: 'hegra',
     src: `${hegraThumbnail}`,
     location: {
       lat: 26.791667,
@@ -56,7 +56,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
       },
     ],
     shortTitle: 'Bahla Fort',
-    slug: 'bahla-fort',
+    slug: 'bahla',
     imageOnly: true,
     src: `${bahlaThumbnail}`,
     location: {
@@ -73,7 +73,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 3,
     title: 'Memphis and its Necropolis',
     shortTitle: 'Memphis',
-    slug: '',
+    slug: 'memphis',
     src: `${memphisThumbnail}`,
     location: {
       lat: 29.9777716269,
@@ -107,7 +107,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 4,
     title: 'Méroé',
     shortTitle: 'Méroé',
-    slug: '',
+    slug: 'meroe',
     src: `${meroeThumbnail}`,
     location: {
       lat: 16.9375,
@@ -129,7 +129,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 5,
     title: 'Leptis Magna',
     shortTitle: 'Leptis Magna',
-    slug: '',
+    slug: 'leptis-magna',
     src: `${leptisThumbnail}`,
     location: {
       lat: 32.635,
@@ -183,7 +183,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 6,
     title: 'Baalbek',
     shortTitle: 'Baalbek',
-    slug: '',
+    slug: 'baalbek',
     tilesets: [
       {
         name: 'Baalbek',
@@ -205,7 +205,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 7,
     title: 'Historic Jeddah, the Gate to Makkah',
     shortTitle: 'Jeddah',
-    slug: '',
+    slug: 'jeddah',
     src: `${jeddahThumbnail}`,
     location: {
       lat: 21.483333,
@@ -231,7 +231,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 8,
     title: 'Byblos',
     shortTitle: 'Byblos',
-    slug: '',
+    slug: 'byblos',
     tilesets: [
       {
         name: 'Byblos',
@@ -253,7 +253,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 9,
     title: 'Qal\'at al-Bahrain',
     shortTitle: 'Qal\'at al-Bahrain',
-    slug: '',
+    slug: 'bahrain',
     tilesets: [
       {
         name: 'Qalat al Bahrain',
@@ -275,7 +275,7 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     id: 10,
     title: 'Cyrene',
     shortTitle: 'Cyrene',
-    slug: '',
+    slug: 'cyrene',
     tilesets: [
       {
         name: 'Temple of Demeter',

@@ -43,7 +43,7 @@ const closeSite = function () {
   sceneStore.setScene(null)
 }
 const openSite = function (site: SiteModel) {
-  top.window.location.href = `https://dive-into-heritage-dev.app.cern.ch/site/${site.shortTitle.toLowerCase()}-storytelling`
+  top.window.location.href = `https://dive-into-heritage-dev.app.cern.ch/site/${site.slug.toLowerCase()}-storytelling`
 }
 </script>
 
