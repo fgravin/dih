@@ -211,6 +211,16 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
       lat: 21.483333,
       long: 39.183333,
     },
+    tilesets: [
+      {
+        name: 'Jeddah',
+        ionId: 2492411,
+      },
+      {
+        name: 'Bab Jadid',
+        ionId: 2490050,
+      },
+    ],
     country: 'Saudi Arabia',
     category: 'CULTURAL',
     overlay: 0,
@@ -244,6 +254,12 @@ export const SITE_FIXTURES = (): SiteApiResponse[] => [
     title: 'Qal\'at al-Bahrain',
     shortTitle: 'Qal\'at al-Bahrain',
     slug: '',
+    tilesets: [
+      {
+        name: 'Qalat al Bahrain',
+        ionId: 2489908,
+      },
+    ],
     src: `${qalatThumbnail}`,
     location: {
       lat: 26.233611,
